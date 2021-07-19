@@ -1,14 +1,24 @@
 import pandas as pd
 from pandas.core.arrays import boolean
 from decimal import *
-import datetime
+import datetime    
 
 
 def check_null(string):
+    '''
     if isinstance(string, float):
         return pd.isna(string)
+    elif isinstance(string, int):
+        return pd.isna(string)
     else:
-        return len(string) > 2
+        return len(string) > 0
+    '''
+    if isinstance(string, float) or isinstance(string, int):
+        string = str(string)
+    else:
+        string = string.strip()
+    return len(string) > 0
+    
 
 
 def check_decimal(dec) -> boolean:

@@ -1,8 +1,8 @@
 ---
 id: 
-  type: string
+  type: int
   required: true
-scientific_title:
+title:
   type: string
   required: true
 date:

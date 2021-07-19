@@ -1,0 +1,9 @@
+---
+atccode: 
+  type: string
+  required: true
+drug:
+  type: string
+  required: true
+  regex: /^[a-z](?:_?[a-z0-9]+)*$/i
+
