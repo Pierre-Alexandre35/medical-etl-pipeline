@@ -10,6 +10,13 @@ def read_input_file(filename):
         print(df)
 
 
+def ingestion(input_folder):
+    for filename in os.listdir(input_folder):
+        read_input_file(input_folder + '/' + filename)
+
+
+ingestion('pipeline/input_data')
+
 '''
 df = pd.read_csv("./text.txt")
 df_to_doct = df.to_dict()
@@ -20,11 +27,3 @@ print(a_json)
 
 dataframe = pd.DataFrame.from_dict(a_json)
 '''
-
-
-def ingestion(input_folder):
-    for filename in os.listdir(input_folder):
-        read_input_file(input_folder + '/' + filename)
-
-
-ingestion('input_data')
