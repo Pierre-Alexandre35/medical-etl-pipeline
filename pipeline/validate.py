@@ -1,43 +1,15 @@
 import pandas as pd
-from pandas.core.arrays import boolean
 import pandas_schema
 from pandas_schema import Column
 from pandas_schema.validation import CustomElementValidation
-from decimal import *
-import datetime
-import numpy as np
 import bios
+from utils.validators import check_null, check_string, check_date
 
 decimal_validation = [CustomElementValidation(lambda i: check_string(i), 'is not a decimal')]
 string_validation = [CustomElementValidation(lambda i: check_string(i), 'is not a string')]
 date_validation = [CustomElementValidation(lambda i: check_string(i), 'is not a valid date')]
 null_validation = [CustomElementValidation(lambda i: check_null(i), 'this field cannot be null')]
 
-def check_null(string):
-    if isinstance(string, float):
-        return pd.isna(string)
-    else:
-        return len(string) > 2
-
-
-def check_decimal(dec) -> boolean:
-    try:
-        Decimal(dec)
-    except InvalidOperation:
-        return False
-    return True
-
-
-def check_string(string) -> boolean:
-    return isinstance(string, str)
-
-
-def check_date(date) -> boolean:
-    try:
-        datetime.datetime.strptime(date, '%Y-%m-%d')
-    except ValueError:
-        return False
-    return True
 
 
 def dataframe_to_BQ(dataframe) -> None:
