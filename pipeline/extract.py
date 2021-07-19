@@ -8,7 +8,7 @@ def read_input_file(filename):
     if file_extension == '.csv':
         df = pd.read_csv(filename)
         print(df)
-    
+
 
 '''
 df = pd.read_csv("./text.txt")
@@ -25,5 +25,6 @@ dataframe = pd.DataFrame.from_dict(a_json)
 def ingestion(input_folder):
     for filename in os.listdir(input_folder):
         read_input_file(input_folder + '/' + filename)
-        
+
+
 ingestion('input_data')
