@@ -8,6 +8,10 @@ import datetime
 import numpy as np
 import bios
 
+decimal_validation = [CustomElementValidation(lambda i: check_string(i), 'is not a decimal')]
+string_validation = [CustomElementValidation(lambda i: check_string(i), 'is not a string')]
+date_validation = [CustomElementValidation(lambda i: check_string(i), 'is not a valid date')]
+null_validation = [CustomElementValidation(lambda i: check_null(i), 'this field cannot be null')]
 
 def check_null(string):
     if isinstance(string, float):
@@ -49,10 +53,24 @@ def do_validation(dataframe, schema) -> pd.DataFrame:
     errors = schema.validate(dataframe)
     errors_index_rows = [e.row for e in errors]
     data_clean = dataframe.drop(index=errors_index_rows)
-    
+    print(data_clean)
     return data_clean
 
 
+
+def generate_column(name, type, is_required):
+    if type != 'string' and type != 'float':
+        raise TypeError("{type} is not supported yet") 
+    if type == 'string':
+        if is_required:
+            return Column(name, string_validation + null_validation)
+        return Column(name, string_validation)
+    else:
+        if is_required:
+            return Column(name, decimal_validation + null_validation)
+        return Column(name, decimal_validation)
+        
+        
 def process_input_schema(input_schema):
     input_schema_dict = input_schema[1]
     schemas_columns = []
@@ -60,31 +78,16 @@ def process_input_schema(input_schema):
         name = item
         type = input_schema_dict[item]['type']
         is_required = input_schema_dict[item]['required']
-        column = Column(name, type, is_required)
-        print(column)
+        column = generate_column(name, type, is_required)
         schemas_columns.append(column)
-    print(schemas_columns)
-        
-    
-    '''
-     # define validation elements
-    decimal_validation = [CustomElementValidation(lambda i: check_string(i), 'is not a decimal')]
-    string_validation = [CustomElementValidation(lambda i: check_string(i), 'is not a string')]
-    date_validation = [CustomElementValidation(lambda i: check_string(i), 'is not a valid date')]
-    null_validation = [CustomElementValidation(lambda i: check_null(i), 'this field cannot be null')]
-    
-    # define validation schema
-    schema = pandas_schema.Schema([
-            Column('id', string_validation + null_validation),
-            Column('scientific_title', string_validation + null_validation),
-            Column('date', string_validation),
-            Column('journal', string_validation)])
+    schema = pandas_schema.Schema(schemas_columns)
     return schema
-    '''
+
 
 def process_dataframes(dataframes):
     input_schema = bios.read("pipeline/schemas/pubmed.yaml")
-    process_input_schema(input_schema)
+    output_schema = process_input_schema(input_schema)
+    do_validation(dataframes[0], output_schema)
     
     '''
     print(dataframes[0])
