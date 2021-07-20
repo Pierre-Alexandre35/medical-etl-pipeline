@@ -21,7 +21,7 @@ def read_csv_file(filename: str) -> DataFrame:
     return dataframe
         
         
-def read_input_file(filename: str) -> function:
+def read_input_file(filename: str):
     file_extension = pathlib.Path(filename).suffix
     if file_extension != ".csv" and file_extension != ".json":
         raise ValueError(f"{filename} is not supported.")

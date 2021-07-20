@@ -1,0 +1,6 @@
+Error in query string: Error processing job 'sbx-
+da:bqjob_r4c13ee8824f308d0_0000017ac0a03e42_1': Encountered " "-" "- "" at line
+1, column 18.
+Was expecting:
+<EOF>
+
