@@ -1,9 +1,11 @@
 # entrypoint (il prend des arguments avec la CLI, ex ENVvariables, projectID, )
 import json 
+import sys
 from google.cloud import bigquery
 from pipeline.extract import extract_input_files_to_dataframes
 from pipeline.validate import process_dataframes
 from utils.file import save_to_file, remove_file_extension
+import click
 
 def run_query(input_query: str):
     """Execute a SQL query on GCP BigQuery and save the result of that query on a new .json file"""
@@ -20,7 +22,7 @@ def run_query(input_query: str):
         raise("this file does not exists")
 
 
-def run_pipeline(input_files_folder: str, input_schemas_folder: str, result_filename: str):
+def run_pipeline(input_files_folder: str, input_schemas_folder: str, result_filename: str) -> None:
     """Execute every steeps on the pipeline and save the result in a new json file"""
     
     ## steep 1: read every input files and convert them in the same format
@@ -40,4 +42,22 @@ def run_pipeline(input_files_folder: str, input_schemas_folder: str, result_file
       
 
 
-run_pipeline('data', 'pipeline/schemas', 'result.json')
+##run_pipeline('data', 'pipeline/schemas', 'result.json')
+
+def run(target: str, input_file_or_folder: str, *args) -> None:
+    """ run either the pipeline or SQL aueries based on the user CLI arguments """
+    if target != 'pipeline' and target != 'sql':
+        raise ValueError("The second argument must be either pipeline or sql")
+    elif target == 'sql':
+        run_query(input_file_or_folder)
+    else:
+        run_pipeline(input_file_or_folder, args[0], args[1])
+
+        
+
+if __name__ == "__main__":
+    args = sys.argv
+    # args[0] = current file
+    # args[1] = function name
+    # args[2:] = function args : (*unpacked)
+    globals()[args[1]](*args[2:])
