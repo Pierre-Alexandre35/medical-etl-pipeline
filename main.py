@@ -22,7 +22,11 @@ def run_query(input_query: str):
 
 def run_pipeline(input_files_folder: str, input_schemas_folder: str, result_filename: str):
     """Execute every steeps on the pipeline and save the result in a new json file"""
-    raw_dataframes = extract_input_files_to_dataframes('data')
-    print(res_list = [x[0] for x in raw_dataframes])
-    cleaned_dataframes = process_dataframes(raw_dataframes)
+    raw_dataframes = extract_input_files_to_dataframes(input_files_folder)
+    for item in raw_dataframes:
+        print(item[0])
+    
+    ##cleaned_dataframes = process_dataframes(raw_dataframes)
 
+
+run_pipeline('data', 'pipeline/schemas', 'result.json')
