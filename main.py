@@ -22,11 +22,22 @@ def run_query(input_query: str):
 
 def run_pipeline(input_files_folder: str, input_schemas_folder: str, result_filename: str):
     """Execute every steeps on the pipeline and save the result in a new json file"""
+    
+    ## steep 1: read every input files and convert them in the same format
     raw_dataframes = extract_input_files_to_dataframes(input_files_folder)
     for item in raw_dataframes:
         print(item[0])
-    
+        
+        
+    ## steep 2: data cleaning - removing rows that are impossible to proccess (ex: missing ID)   
     ##cleaned_dataframes = process_dataframes(raw_dataframes)
+
+    ## steep 3: data formating - reformat rows with readable but inconsistent value (ex: different date format)   
+    
+    ## steep 4: save cleaned and formated data into a new folder
+    
+    ## steep 5: processing the data to geenrate the graph
+      
 
 
 run_pipeline('data', 'pipeline/schemas', 'result.json')

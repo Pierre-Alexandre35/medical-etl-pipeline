@@ -26,6 +26,7 @@ def do_validation(dataframe, schema) -> pd.DataFrame:
 
 
 def generate_column(name: str, type: str, is_required: boolean) -> Column:
+    """ generate a Column based on the requirements provided in the schema """
     if type != 'string' and type != 'float' and type != 'int' :
         raise TypeError("{{type}} is not supported yet") 
     if type == 'string':
@@ -43,6 +44,10 @@ def generate_column(name: str, type: str, is_required: boolean) -> Column:
         
         
 def process_input_schema(input_schema) -> pandas_schema.Schema:
+    """ Given a .yaml schema, this method will read the schema to generate a pandas.schema
+        based on the informations provided in the .yaml schema. This schema will be used against
+        the current file to check if some rows are unvalid and therefore must be removed
+    """
     input_schema_dict = input_schema[1]
     schemas_columns = []
     for item in input_schema_dict:
