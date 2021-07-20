@@ -5,4 +5,4 @@ datetime
 pyyaml
 bios
 google-cloud-bigquery
-import click
+click
