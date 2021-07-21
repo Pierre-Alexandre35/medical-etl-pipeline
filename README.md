@@ -36,7 +36,7 @@ Part 2 - SQL Queries for sales analysis
 
 
 ## Architecture
-
+```     
 ├── .github/                                          # Github Actions
 ├── data/                                             # pipeline input folder
 ├── devops/                                           # Docker image  
@@ -54,11 +54,7 @@ Part 2 - SQL Queries for sales analysis
 ├── utils/                                            # utils functions
 ├── main.py                                           # launch the pipeline
 └── settings.py
-
-
-
-
-
+```     
 
 
 ## Roadmap
