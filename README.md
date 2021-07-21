@@ -44,7 +44,9 @@ Part 2 - SQL Queries for sales analysis
 - Linter modifications following pip8 convention
 - Create a Dockerfile
 
-##Q&A 
+
+## Q&A 
+
 Quels sont les éléments à considérer pour faire évoluer votre code afin qu’il puisse gérer de grosses volumétries de données (fichiers de plusieurs To ou millions de fichiers par exemple) ? Pourriez-vous décrire les modifications qu’il faudrait apporter, s’il y en a, pour prendre en considération de telles volumétries ?
 Pour gérer une pipeline d'ingestion de grosses volumétries, il est préférable d'utiliser une solution Cloud afin de stocker nos données mais également de pouvoir mettre en place une pipeline avec un mécanisme de parallelisme pour augmenter la vitesse de traitement global entre l'ingestion de la data et l'output.
 
