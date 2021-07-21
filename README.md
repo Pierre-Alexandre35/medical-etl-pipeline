@@ -3,8 +3,10 @@
 
 ## Contents
 - [Description](#Description)
-- [Architecture](#Architecture)
+- [Repository Structure](#Repository_Structure)
 - [Installation](#Installation)
+- [Q&A](#Q&A)
+- [Roadmap](#Roadmap)
 
 
 ## Description
@@ -54,7 +56,7 @@ Pour l'ingestion il est possible d'utiliser BigQuery qui est une solution GCP de
 Pour le processing d'extraction, de transformation et de loading, si les transformations que l'on effectue sur les données sont assez complexes, je pense opté pour GCP Dataflow voir un framework de calcul distribué tel que Dataproc (avec pyspark).
 
 
-## Architecture
+## Repository_Structure
 ```                                         
 ├── .github/                                          # Github Actions
 ├── data/                                             # pipeline input folder
