@@ -64,7 +64,7 @@ Part 2 - SQL Queries for sales analysis
 ## Roadmap
 - Fix file saving path (priority)
 - Add the crinimal_trials in the data processing process (priority)
-- Add unit tests (priority)
+- Add unit tests (priority) 
 - Fix CLI to launch the pipeline (priority)
 - Removed hard-coded variables and moved them to the settings.py (priority)
 - Linter modifications following pip8 convention
