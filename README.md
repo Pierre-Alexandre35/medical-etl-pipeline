@@ -3,7 +3,7 @@
 
 ## Contents
 - [Description](#Description)
-- [Architecture](#Architecture)
+- [Repository](#Repository)
 - [Installation](#Installation)
 
 
@@ -35,7 +35,7 @@ Part 2 - SQL Queries for sales analysis
 ```python main.py run sql OUTPOUT_FILE```
 
 
-## Architecture
+## Repository
 ```     
 ├── .github/                                          # Github Actions
 ├── data/                                             # pipeline input folder
