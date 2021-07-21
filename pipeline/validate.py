@@ -14,17 +14,16 @@ date_validation = [CustomElementValidation(lambda i: check_string(i), 'is not a 
 null_validation = [CustomElementValidation(lambda i: check_null(i), 'this field cannot be null')]
 
 
-def do_validation(dataframe, schema) -> pd.DataFrame:
-    # apply validation
+def apply_validation(dataframe, schema) -> pd.DataFrame:
+    """ apply validation schemas and drop unvalid columns """
     errors = schema.validate(dataframe)
-    ##for err in errors:
-    ##    print(err)
     errors_index_rows = [e.row for e in errors]
     data_clean = dataframe.drop(index=errors_index_rows)
     return data_clean
 
 
 def generate_column(name: str, type: str, is_required: boolean, regex=None) -> Column:
+    """ generate a list of Columns based on the schema provided by the user """
     if type != 'string' and type != 'float' and type != 'int' :
         raise TypeError("{{type}} is not supported yet") 
     if type == 'string':
@@ -42,6 +41,7 @@ def generate_column(name: str, type: str, is_required: boolean, regex=None) -> C
         
         
 def process_input_schema(input_schema) -> pandas_schema.Schema:
+    """ check with functions need to be called based on the schema patterm """
     input_schema_dict = input_schema[1]
     schemas_columns = []
     for item in input_schema_dict:
@@ -59,6 +59,7 @@ def process_input_schema(input_schema) -> pandas_schema.Schema:
 
 
 def validate_dataframes(dataframes: list) -> None:
+    """ loop over a list of daatframes to apply validation schemas """
     cleaned_dataframes = list()
     for dataframe in dataframes:
         dataframe_name = dataframe[0]
@@ -66,7 +67,7 @@ def validate_dataframes(dataframes: list) -> None:
         schema_path = "pipeline/schemas/" + dataframe_name  + ".yaml"
         input_schema = bios.read(schema_path)
         output_schema = process_input_schema(input_schema)
-        cleaned_dataframe = do_validation(df_dataframe, output_schema)
+        cleaned_dataframe = apply_validation(df_dataframe, output_schema)
         cleaned_dataframes.append(cleaned_dataframe)
     return cleaned_dataframes
         
