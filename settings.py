@@ -1,2 +1,3 @@
 INPUT_DATA_PATH=''
 OUTPUT_PATH=''
+DATE_FORMAT="%Y-%m-%d"

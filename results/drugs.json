@@ -1,0 +1,9 @@
+{
+  "0": { "atccode": "A04AD", "drug": "DIPHENHYDRAMINE" },
+  "1": { "atccode": "S03AA", "drug": "TETRACYCLINE" },
+  "2": { "atccode": "V03AB", "drug": "ETHANOL" },
+  "3": { "atccode": "A03BA", "drug": "ATROPINE" },
+  "4": { "atccode": "A01AD", "drug": "EPINEPHRINE" },
+  "5": { "atccode": "6302001", "drug": "ISOPRENALINE" },
+  "6": { "atccode": "R01AD", "drug": "BETAMETHASONE" }
+}

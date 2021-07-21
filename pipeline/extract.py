@@ -36,10 +36,12 @@ def read_input_file(filename: str):
 def extract_input_files_to_dataframes(input_folder: str) -> tuple:
     """ loop over a directory to proccess every files in that directory and add every files processed into a list """
     dataframes = []
+    count = 0
     for filename in os.listdir(input_folder):
         file_relative_path = input_folder + '/' + filename
         dataframe = read_input_file(file_relative_path)
-        extracted_file = (remove_file_extension(file_relative_path), dataframe)
+        filename_without_extension = remove_file_extension(file_relative_path)
+        extracted_file = (filename_without_extension, dataframe)
         dataframes.append(extracted_file)
     return dataframes
         

@@ -6,7 +6,7 @@ from pandas_schema import Column
 from pandas_schema.validation import CustomElementValidation
 import bios
 from utils.validators import check_null, check_string, check_date, check_decimal
-
+import json
 
 decimal_validation = [CustomElementValidation(lambda i: check_decimal(i), 'is not a decimal')]
 string_validation = [CustomElementValidation(lambda i: check_string(i), 'is not a string')]
@@ -17,15 +17,14 @@ null_validation = [CustomElementValidation(lambda i: check_null(i), 'this field 
 def do_validation(dataframe, schema) -> pd.DataFrame:
     # apply validation
     errors = schema.validate(dataframe)
-    for err in errors:
-        print(err)
+    ##for err in errors:
+    ##    print(err)
     errors_index_rows = [e.row for e in errors]
     data_clean = dataframe.drop(index=errors_index_rows)
-    print(data_clean)
     return data_clean
 
 
-def generate_column(name: str, type: str, is_required: boolean) -> Column:
+def generate_column(name: str, type: str, is_required: boolean, regex=None) -> Column:
     if type != 'string' and type != 'float' and type != 'int' :
         raise TypeError("{{type}} is not supported yet") 
     if type == 'string':
@@ -49,15 +48,30 @@ def process_input_schema(input_schema) -> pandas_schema.Schema:
         name = item
         type = input_schema_dict[item]['type']
         is_required = input_schema_dict[item]['required']
-        column = generate_column(name, type, is_required)
+        if 'regex' in input_schema_dict[item]:
+            regex = input_schema_dict[item]['regex']
+            column = generate_column(name, type, is_required, regex)
+        else:
+            column = generate_column(name, type, is_required)
         schemas_columns.append(column)
     schema = pandas_schema.Schema(schemas_columns)
     return schema
 
 
-def process_dataframes(dataframes: list) -> None:
-    input_schema = bios.read("pipeline/schemas/pubmed.yaml")
-    output_schema = process_input_schema(input_schema)
-    do_validation(dataframes[3], output_schema)
+def validate_dataframes(dataframes: list) -> None:
+    cleaned_dataframes = list()
+    for dataframe in dataframes:
+        dataframe_name = dataframe[0]
+        df_dataframe = dataframe[1]
+        schema_path = "pipeline/schemas/" + dataframe_name  + ".yaml"
+        input_schema = bios.read(schema_path)
+        output_schema = process_input_schema(input_schema)
+        cleaned_dataframe = do_validation(df_dataframe, output_schema)
+        cleaned_dataframes.append(cleaned_dataframe)
+    return cleaned_dataframes
+        
 
-    
+
+
+
+
