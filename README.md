@@ -35,6 +35,16 @@ Part 2 - SQL Queries for sales analysis
 ```python main.py run sql OUTPOUT_FILE```
 
 
+## Roadmap
+- Fix file saving path (priority)
+- Add the crinimal_trials in the data processing process (priority)
+- Add unit tests (priority) 
+- Fix CLI to launch the pipeline (priority)
+- Removed hard-coded variables and moved them to the settings.py (priority)
+- Linter modifications following pip8 convention
+- Create a Dockerfile
+
+
 ## Architecture
 
 ├── .github/                                          # Github Actions
@@ -56,15 +66,3 @@ Part 2 - SQL Queries for sales analysis
 └── settings.py
 
 
-
-
-
-
-
-## Roadmap
-- Fix file saving path (priority)
-- Add the crinimal_trials in the data processing process (priority)
-- Add unit tests (priority) 
-- Fix CLI to launch the pipeline (priority)
-- Removed hard-coded variables and moved them to the settings.py (priority)
-- Linter modifications following pip8 convention
