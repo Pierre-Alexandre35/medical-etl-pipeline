@@ -1,1 +1,9 @@
 pytest
+pandas
+flake8
+datetime
+pyyaml
+bios
+google-cloud-bigquery
+click
+python-dateutil

@@ -1,0 +1,13 @@
+---
+id: 
+  type: int
+  required: true
+title:
+  type: string
+  required: true
+date:
+  type: string
+  required: true
+journal:
+  type: string
+  required: true
