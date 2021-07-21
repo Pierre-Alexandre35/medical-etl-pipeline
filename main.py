@@ -1,4 +1,3 @@
-# entrypoint (il prend des arguments avec la CLI, ex ENVvariables, projectID, )
 import json 
 import sys
 from google.cloud import bigquery
@@ -6,8 +5,11 @@ from pipeline.extract import extract_input_files_to_dataframes
 from pipeline.validate import validate_dataframes
 from pipeline.cleaning import clean_dataframes
 from utils.file import save_to_file, remove_file_extension, dataframe_to_dictionary
+from settings import SQL_RESULT_FILE_EXTENSION
 import click
 import pandas as pd
+
+
 def run_query(input_query: str):
     """Execute a SQL query on GCP BigQuery and save the result of that query on a new .json file"""
     client = bigquery.Client()
@@ -17,7 +19,7 @@ def run_query(input_query: str):
         query_job = client.query(query_reader)
         records = [dict(row) for row in query_job]
         json_obj = json.dumps(str(records))
-        result_file_path = remove_file_extension(input_query) + '.json'
+        result_file_path = remove_file_extension(input_query) + SQL_RESULT_FILE_EXTENSION
         save_to_file(json_obj, result_file_path)
     except FileNotFoundError:
         raise("this file does not exists")

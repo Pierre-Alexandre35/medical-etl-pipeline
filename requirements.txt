@@ -7,3 +7,4 @@ bios
 google-cloud-bigquery
 click
 python-dateutil
+config
