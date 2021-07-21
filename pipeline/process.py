@@ -1,16 +1,22 @@
 import json
-  
+from settings import (
+    RESULTS_FOLDER,
+    DRUGS_FILENAME,
+    CLINICAL_TRIALS_FILENAME,
+    PUBMED_FILENAME,
+    GRAPH_NAME
+)  
     
 # Opening JSON file
-with open('results/drugs.json') as json_file:
+with open(RESULTS_FOLDER + DRUGS_FILENAME) as json_file:
     drugs = json.load(json_file)
 
 # Opening JSON file
-with open('results/clinical_trials.json') as json_file:
+with open(RESULTS_FOLDER + CLINICAL_TRIALS_FILENAME) as json_file:
     clinical_trials = json.load(json_file)
 
 # Opening JSON file
-with open('results/pubmed.json') as json_file:
+with open(RESULTS_FOLDER + PUBMED_FILENAME) as json_file:
     pudmed = json.load(json_file)
 
 
@@ -43,11 +49,5 @@ def generate_graph(input_dic, drugs_dic):
     
     json_result = json.dumps(mention_drug_items)
     print(mention_drug_items)
-    with open('results/output.json', 'w') as f:
+    with open(RESULTS_FOLDER + GRAPH_NAME, 'w') as f:
         f.write(json_result)
-        
-
-
-generate_graph(pudmed, drugs)
-
-
