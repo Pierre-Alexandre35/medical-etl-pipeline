@@ -2,9 +2,10 @@ import json
 import sys
 import os
 from google.cloud import bigquery
-from pipeline.extract import extract_input_files_to_dataframes
-from pipeline.validate import validate_dataframes
-from pipeline.cleaning import clean_dataframes
+from pipeline.extract import extract_data
+from pipeline.validate import validate_data
+from pipeline.cleaning import clean_data
+from pipeline.process import process_data
 from utils.file import save_to_file, remove_file_extension, dataframe_to_dictionary
 from settings import FINAL_RESULT_KEYS
 import argparse
@@ -38,23 +39,17 @@ def run_query(input_query: str):
 
 def run_pipeline() -> None:
     """Execute every steeps on the pipeline and save the result in a new json file"""
-    all_publications = []
-    for publication_type in os.listdir('data/publications'):
-        path = 'data/publications/' + str(publication_type)
-        if os.path.isdir(path):
-            validation_schema = path + '/' + "schema.yaml"
-            data_path = path + '/' + 'data'
-            for publication_data in os.listdir(data_path):
-                raw_dataframes = extract_input_files_to_dataframes(data_path)
-            publication = dict(name=publication_type,
-                               schema=validation_schema,
-                               dataframes=raw_dataframes)
-            all_publications.append(publication)
+    
+    raw_publications = extract_data()
+    validated_publications = validate_data(raw_publications)
+    cleaned_publications = clean_data(validated_publications)
+    processed_publications = process_data(cleaned_publications)
 
-    for publication in all_publications:
-        publication['dataframes'] = validate_dataframes(publication['dataframes'], publication['schema'])
+    
+    
+
+    '''
         
-    d = {}
 
     for publication in all_publications:
         file = pd.concat(publication['dataframes'])
@@ -63,6 +58,9 @@ def run_pipeline() -> None:
         path = 'results/pipeline' + publication['name'] + '.json'
         with open(path, 'w') as f:
             f.write(r)
+    '''
+            
+    
 
 
 

@@ -68,7 +68,10 @@ def validate_dataframes(dataframes: list, schema: str) -> None:
         validate_dataframes.append(cleaned_dataframe)
     return validate_dataframes
         
-
+def validate_data(publications):
+    for publication in publications:
+        publication['dataframes'] = validate_dataframes(publication['dataframes'], publication['schema'])
+    return publications
         
 
 
