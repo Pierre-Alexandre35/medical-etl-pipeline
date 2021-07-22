@@ -1,5 +1,6 @@
-import json 
+import json
 import sys
+import os
 from google.cloud import bigquery
 from pipeline.extract import extract_input_files_to_dataframes
 from pipeline.validate import validate_dataframes
@@ -8,6 +9,9 @@ from utils.file import save_to_file, remove_file_extension, dataframe_to_diction
 from settings import FINAL_RESULT_KEYS
 import argparse
 import pandas as pd
+from pathlib import Path
+from functools import reduce
+from collections import defaultdict
 
 parser = argparse.ArgumentParser()
 
@@ -17,9 +21,9 @@ def run_query(input_query: str):
     print(input_query)
     if input_query != 'total_sales' and input_query != 'sales_by_category':
         raise ValueError("You must run either the total_sales or sales_by_category query")
-    else: 
+    else:
         client = bigquery.Client()
-        sql_file = "sql/"  + input_query + ".sql"
+        sql_file = "sql/" + input_query + ".sql"
         try:
             with open(sql_file, "r") as text_file:
                 query_reader = text_file.read()
@@ -32,18 +36,49 @@ def run_query(input_query: str):
             raise("this file does not exists")
 
 
-def run_pipeline(input_folder: str, input_schemas_folder: str, result_filename: str) -> None:
+def run_pipeline() -> None:
     """Execute every steeps on the pipeline and save the result in a new json file"""
-    
-    ## steep 1: read every input files and convert them into Pandas.Dataframes
-    raw_dataframes = extract_input_files_to_dataframes(input_folder)
-        
-    ## steep 2: check the validity of every row of Pandas.Dataframes by comparing each Dataframe with it's own schema provided by the
-    validated_datafrmes = validate_dataframes(raw_dataframes)
+    all_publications = []
+    for publication_type in os.listdir('data/publications'):
+        path = 'data/publications/' + str(publication_type)
+        if os.path.isdir(path):
+            validation_schema = path + '/' + "schema.yaml"
+            data_path = path + '/' + 'data'
+            for publication_data in os.listdir(data_path):
+                raw_dataframes = extract_input_files_to_dataframes(data_path)
+            publication = dict(name=publication_type,
+                               schema=validation_schema,
+                               dataframes=raw_dataframes)
+            all_publications.append(publication)
 
-    ## steep 3: reformat rows with readable but inconsistent value (ex: different date format)   
-    cleaned_dataframes = clean_dataframes(validated_datafrmes)
+    for publication in all_publications:
+        publication['dataframes'] = validate_dataframes(publication['dataframes'], publication['schema'])
+        
+    d = {}
+
+    for publication in all_publications:
+        file = pd.concat(publication['dataframes'])
+        cleaned_dic =  file.set_index('id').T.to_dict('dict')
+        r = json.dumps(cleaned_dic)
+        path = 'results/pipeline' + publication['name'] + '.json'
+        with open(path, 'w') as f:
+            f.write(r)
+
+
+
+        
     
+    
+    
+
+
+   
+    '''
+
+    for publication in all_publications:
+        publication['dataframes'] = clean_dataframes(publication['dataframes'], publication['schema'])
+
+
     ## steep 4: save cleaned and formated data into a new folder before to process data
     
     iterator = 0
@@ -52,32 +87,23 @@ def run_pipeline(input_folder: str, input_schemas_folder: str, result_filename: 
         d[dataframe['id']] = dataframe.to_dict()
         print(d)
 
-        
-        
+    '''
 
-
-
-
-    ## steep 5: processing the data to geenrate the graph
-
-      
+# steep 5: processing the data to geenrate the graph
 
 
 def run():
     """ run either the pipeline or SQL aueries based on the user CLI arguments """
-    parser.add_argument('--pipeline',  nargs='?', const=True, type=bool, default=True,help='run the ETL pipeline')
+    parser.add_argument('--pipeline', nargs='?', const=True, type=bool, default=True, help='run the ETL pipeline')
     parser.add_argument('--query', help='run a query')
     args = parser.parse_args()
     if not any(vars(args).values()):
-        print('You must provide some arguments to start the program. Please run main.py --help to know more about our features'
+        print('You must provide some arguments to start the program. Please run main.py --help to know more about our features')
     if args.query:
         run_query(args.query)
     else:
         run_pipeline()
 
 
-
 if __name__ == "__main__":
     run()
-    
-    
