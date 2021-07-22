@@ -38,14 +38,15 @@ def generate_graph(input_dic, drugs_dic):
                                     )
                 mention_drug_items.append(new_mention_item)
     
-    json_result = json.dumps(mention_drug_items)
-    print(mention_drug_items)
-    with open(RESULTS_FOLDER + GRAPH_NAME, 'w') as f:
-        f.write(json_result)
+    return mention_drug_items
 
+
+def save_to_file(data, path):
+    json_result = json.dumps(data)
+    with open(path, 'w') as f:
+        f.write(json_result)
         
-        
-def process_data(storage_path):
+def process_data(storage_path, output_path):
     drugs = {
   "0": { "atccode": "A04AD", "drug": "DIPHENHYDRAMINE" },
   "1": { "atccode": "S03AA", "drug": "TETRACYCLINE" },
@@ -59,4 +60,5 @@ def process_data(storage_path):
         path = storage_path + str(publication_type)
         with open(path) as json_file:
             data = json.load(json_file)
-            generate_graph(data, drugs)
+        data = generate_graph(data, drugs)
+        save_to_file(data, output_path)
