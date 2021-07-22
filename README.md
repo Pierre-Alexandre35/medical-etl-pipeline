@@ -50,11 +50,14 @@ GROUP by s.client_id ;
 <br>
 
 ### To run the pipeline 
-```python main.py run pipeline INPUT_FOLDER_PATH YAML_SCHEMA_FOLDER_PATH OUTPOUT_FILE```
+```python main.py --pipeline```
 <br>
 
 ### To run the queries
-```python main.py run sql OUTPOUT_FILE```
+```
+python main.py --query=<QUERY_NAME> 
+## where QUERY_NAME is total_sales or sales_by_category 
+```
 
 
 ## Roadmap

@@ -63,42 +63,21 @@ def run_pipeline(input_folder: str, input_schemas_folder: str, result_filename: 
       
 
 
-def run(target: str) -> None:
+def run():
     """ run either the pipeline or SQL aueries based on the user CLI arguments """
-    if target not in 'pipeline' and 'custom_queries':
-        raise ValueError("The second argument must be either pipeline or sql")
-    elif target == 'sql':
-        run_query(input_file_or_folder)
-    else:
-        run_pipeline(input_file_or_folder, args[0], args[1])
-
-
-
-def get_user_input():
-    parser.add_argument('--pipeline', help='')
+    parser.add_argument('--pipeline',  nargs='?', const=True, type=bool, default=True,help='run the ETL pipeline')
     parser.add_argument('--query', help='run a query')
-    parser.add_argument('--option3', help='description for option3')
     args = parser.parse_args()
     if not any(vars(args).values()):
-        print('You must provide some arguments to start the program. Please run main.py --help to know more about our features')
-    
+        print('You must provide some arguments to start the program. Please run main.py --help to know more about our features'
     if args.query:
         run_query(args.query)
-
+    else:
+        run_pipeline()
 
 
 
 if __name__ == "__main__":
-    get_user_input()
+    run()
     
     
-
-
-        
-
-
-
-
-
-
-##run_pipeline('data', 'pipeline/schemas', 'result.json')
