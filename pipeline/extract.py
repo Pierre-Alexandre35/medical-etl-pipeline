@@ -44,5 +44,19 @@ def extract_input_files_to_dataframes(input_folder: str) -> tuple:
         
 
 
+def extract_data():
+    all_publications = []
+    for publication_type in os.listdir('data/publications'):
+        path = 'data/publications/' + str(publication_type)
+        if os.path.isdir(path):
+            validation_schema = path + '/' + "schema.yaml"
+            data_path = path + '/' + 'data'
+            for publication_data in os.listdir(data_path):
+                raw_dataframes = extract_input_files_to_dataframes(data_path)
+                publication = dict(name=publication_type,
+                               schema=validation_schema,
+                               dataframes=raw_dataframes)
+                all_publications.append(publication)
+    return all_publications
 
 

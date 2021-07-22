@@ -5,7 +5,7 @@ OUTPUT_PATH=''
 DATE_FORMAT="%Y-%m-%d"
 
 
-RESULTS_FOLDER = "results"
+RESULTS_FOLDER = "results/pipeline/"
 DRUGS_FILENAME = "drugs.json"
 CLINICAL_TRIALS_FILENAME = "clinical_trials.json"
 PUBMED_FILENAME = "pubmed.json"

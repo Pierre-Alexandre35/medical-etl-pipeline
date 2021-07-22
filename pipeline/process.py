@@ -51,3 +51,7 @@ def generate_graph(input_dic, drugs_dic):
     print(mention_drug_items)
     with open(RESULTS_FOLDER + GRAPH_NAME, 'w') as f:
         f.write(json_result)
+        
+        
+def process_data(publications):
+    return 1

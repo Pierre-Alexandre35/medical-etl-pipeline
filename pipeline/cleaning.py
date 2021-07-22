@@ -25,3 +25,5 @@ def clean_dataframes(dataframes: list) -> list:
         dataframe = format_date(dataframe)
     return dataframes
 
+def clean_data(publications):
+    return publications
