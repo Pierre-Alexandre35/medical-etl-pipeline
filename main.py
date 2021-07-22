@@ -10,7 +10,7 @@ from sql.queries import execute_query
 parser = argparse.ArgumentParser()
 
 
-def run_query(input_query: str):
+def run_query(input_query: str) -> None:
     """Execute a SQL query on GCP BigQuery and save the result of that query on a new .json file"""
     if input_query != 'total_sales' and input_query != 'sales_by_category':
         raise ValueError("You must run either the total_sales or sales_by_category query")
@@ -28,7 +28,7 @@ def run_pipeline() -> None:
     process_data('results/pipeline/storage/', 'results/pipeline/graph.json')
 
 
-def run():
+def run() -> None:
     """ run either the pipeline or SQL aueries based on the user CLI arguments """
     parser.add_argument('--pipeline', nargs='?', const=True, type=bool, default=True, help='run the ETL pipeline')
     parser.add_argument('--query', help='run a query')
