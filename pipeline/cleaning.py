@@ -23,6 +23,7 @@ def clean_dataframes(dataframes: list) -> list:
     """ format a list of dataframes for data consistency """
     for dataframe in dataframes:
         dataframe = format_date(dataframe)
+        dataframe = rename_column(dataframe, 'scientific_title', 'title')
     return dataframes
 
 

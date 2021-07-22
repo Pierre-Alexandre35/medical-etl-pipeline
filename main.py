@@ -5,6 +5,7 @@ from google.cloud import bigquery
 from pipeline.extract import extract_data
 from pipeline.validate import validate_data
 from pipeline.cleaning import clean_data
+from pipeline.save import save_data
 from pipeline.process import process_data
 from utils.file import save_to_file, remove_file_extension, dataframe_to_dictionary
 from settings import FINAL_RESULT_KEYS
@@ -17,17 +18,6 @@ from collections import defaultdict
 parser = argparse.ArgumentParser()
 
 
-def save_data(cleaned_publications, location, format):
-    for publication in cleaned_publications:
-        file = pd.concat(publication['dataframes'])
-        cleaned_dic =  file.set_index('id').T.to_dict('dict')
-        print(cleaned_dic)
-        r = json.dumps(cleaned_dic)
-        path = location + publication['name'] + '.' + format
-        with open(path, 'w') as f:
-            f.write(r)
-            
-            
 def run_query(input_query: str):
     """Execute a SQL query on GCP BigQuery and save the result of that query on a new .json file"""
     print(input_query)
@@ -50,56 +40,12 @@ def run_query(input_query: str):
 
 def run_pipeline() -> None:
     """Execute every steeps on the pipeline and save the result in a new json file"""
-    
-    
-    ##raw_publications = extract_data('data/publications/', 'schema.yaml')
-    ##validated_publications = validate_data(raw_publications)
-    ##cleaned_publications = clean_data(validated_publications)
-    ##save_data(cleaned_publications, 'results/pipeline/', 'json')
-    process_data('results/pipeline/')
 
-    
-    '''
-
-        
-
-    for publication in all_publications:
-        file = pd.concat(publication['dataframes'])
-        cleaned_dic =  file.set_index('id').T.to_dict('dict')
-        r = json.dumps(cleaned_dic)
-        path = 'results/pipeline' + publication['name'] + '.json'
-        with open(path, 'w') as f:
-            f.write(r)
-    '''
-            
-    
-
-
-
-        
-    
-    
-    
-
-
-   
-    '''
-
-    for publication in all_publications:
-        publication['dataframes'] = clean_dataframes(publication['dataframes'], publication['schema'])
-
-
-    ## steep 4: save cleaned and formated data into a new folder before to process data
-    
-    iterator = 0
-    d = {}
-    for dataframe in cleaned_dataframes:
-        d[dataframe['id']] = dataframe.to_dict()
-        print(d)
-
-    '''
-
-# steep 5: processing the data to geenrate the graph
+    raw_publications = extract_data('data/publications/', 'schema.yaml')
+    validated_publications = validate_data(raw_publications)
+    cleaned_publications = clean_data(validated_publications)
+    save_data(cleaned_publications, 'results/pipeline/storage/', 'json')
+    process_data('results/pipeline/storage/', 'results/pipeline/graph.json')
 
 
 def run():
