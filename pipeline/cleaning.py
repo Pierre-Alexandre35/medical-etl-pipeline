@@ -4,6 +4,13 @@ from settings import INPUT_DATE_FORMAT
 import pandas as pd 
 from settings import INPUT_DATE_COLUMN_NAME
 
+def rename_column(dataframe: pd.DataFrame, input_name:str, output_name:str)-> pd.DataFrame:
+    if input_name in dataframe:
+        dataframe.rename(columns={input_name: output_name}, inplace=True)
+    return dataframe
+
+
+
 def format_date(dataframe: pd.DataFrame) -> pd.DataFrame:
     """ convert the column date in the correct format """
     if 'date' in dataframe:

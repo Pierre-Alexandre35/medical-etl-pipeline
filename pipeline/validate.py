@@ -58,18 +58,17 @@ def process_input_schema(input_schema) -> pandas_schema.Schema:
     return schema
 
 
-def validate_dataframes(dataframes: list) -> None:
+def validate_dataframes(dataframes: list, schema: str) -> None:
     """ loop over a list of daatframes to apply validation schemas """
-    cleaned_dataframes = list()
+    validate_dataframes = []
+    input_schema = bios.read(schema)
     for dataframe in dataframes:
-        dataframe_name = dataframe[0]
-        df_dataframe = dataframe[1]
-        schema_path = "pipeline/schemas/" + dataframe_name  + ".yaml"
-        input_schema = bios.read(schema_path)
         output_schema = process_input_schema(input_schema)
-        cleaned_dataframe = apply_validation(df_dataframe, output_schema)
-        cleaned_dataframes.append(cleaned_dataframe)
-    return cleaned_dataframes
+        cleaned_dataframe = apply_validation(dataframe, output_schema)
+        validate_dataframes.append(cleaned_dataframe)
+    return validate_dataframes
+        
+
         
 
 

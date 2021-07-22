@@ -11,3 +11,5 @@ date:
 journal:
   type: string
   required: true
+
+  
