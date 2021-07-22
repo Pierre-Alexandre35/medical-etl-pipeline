@@ -5,6 +5,6 @@ datetime
 pyyaml
 bios
 google-cloud-bigquery
-click
 python-dateutil
 config
+pandas-schema
