@@ -72,6 +72,7 @@ def validate_data(publications):
     for publication in publications:
         publication['dataframes'] = validate_dataframes(publication['dataframes'], publication['schema'])
     return publications
+
         
 
 
