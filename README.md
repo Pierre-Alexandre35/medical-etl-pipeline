@@ -8,14 +8,14 @@
 
 
 ## Description
-Part 1 - Python ETL (Extract, Transform and Load) pipeline to analyze drugs frequency counts on different input sources (medical publication, pudmed, ...). 
+#### Part 1 - Python ETL (Extract, Transform and Load) pipeline to analyze drugs frequency counts on different input sources (medical publication, pudmed, ...). 
 - data ingestion: ingestion of input files of anny kind of formats (.csv. .json)
 - data validation: validate data inside ingested files. If some data can't be used for later analysis, the data is going to be deleted (ex: missing ID)
 - data formating: enforce consistency such as every files should ahve the same date format
 - data storage: store cleaned data before perform data processing and geenrate the graph 
 - data processing: read data from the data storage and generate a graph according to the business requirement 
 
-Part 2 - SQL Queries for sales analysis
+#### Part 2 - SQL Queries for sales analysis
 
 - Query 1: total sales
 ```
