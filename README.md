@@ -17,6 +17,26 @@ Part 1 - Python ETL (Extract, Transform and Load) pipeline to analyze drugs freq
 
 Part 2 - SQL Queries for sales analysis
 
+- Query 1: total sales
+```
+SELECT date, sum(prod_price * prod_qty) as total_sales 
+FROM `sbx-da.medical.sales`
+GROUP BY date
+ORDER BY date DESC  
+```  
+
+- Query 2: sales by category and by customer ID in 2019
+```
+SELECT s.client_id,
+       sum(case when product_type = 'DECO' then s.prod_price * s.prod_qty else 0 end) deco_sales,
+       sum(case when product_type = 'MEUBLE' then s.prod_price * s.prod_qty else 0 end) meuble_sales
+FROM  `sbx-da.medical.sales` s join
+     `sbx-da.medical.categories` p
+     on s.prop_id = p.product_id
+WHERE s.date between '2019-01-01' and '2019-12-31'
+GROUP by s.client_id ;
+```  
+
 ## Installation 
 ```git clone```
 <br>
