@@ -100,4 +100,12 @@ Pour le processing d'extraction, de transformation et de loading, si les transfo
 └── settings.py
 ```                                         
 
+allUsers
 
+project-id 
+
+sbx-da:medical
+
+categories 
+
+sales
