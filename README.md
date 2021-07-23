@@ -9,6 +9,10 @@
 
 ## Description
 #### Part 1 - Python ETL (Extract, Transform and Load) pipeline to analyze drugs frequency counts on different input sources (medical publication, pudmed, ...). 
+
+![A test image](docs/pipeline.png)
+
+
 - data ingestion: ingestion of input files of anny kind of formats (.csv. .json)
 - data validation: validate data inside ingested files. If some data can't be used for later analysis, the data is going to be deleted (ex: missing ID)
 - data formating: enforce consistency such as every files should ahve the same date format
@@ -96,12 +100,4 @@ Pour le processing d'extraction, de transformation et de loading, si les transfo
 └── settings.py
 ```                                         
 
-allUsers
 
-project-id 
-
-sbx-da:medical
-
-categories 
-
-sales
