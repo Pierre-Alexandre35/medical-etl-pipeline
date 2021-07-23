@@ -24,8 +24,8 @@ def apply_validation(dataframe, schema) -> pd.DataFrame:
 
 def generate_column(name: str, type: str, is_required: boolean, regex=None) -> Column:
     """ generate a list of Columns based on the schema provided by the user """
-    if type != 'string' and type != 'float' and type != 'int' :
-        raise TypeError("{{type}} is not supported yet") 
+    if type != 'string' and type != 'float' and type != 'int':
+        raise TypeError("{{type}} is not supported yet")
     if type == 'string':
         if is_required:
             return Column(name, string_validation + null_validation)
@@ -33,13 +33,13 @@ def generate_column(name: str, type: str, is_required: boolean, regex=None) -> C
     elif type == 'int':
         if is_required:
             return Column(name, decimal_validation + null_validation)
-        return Column(name, decimal_validation)        
+        return Column(name, decimal_validation)
     else:
         if is_required:
             return Column(name, decimal_validation + null_validation)
         return Column(name, decimal_validation)
-        
-        
+
+
 def process_input_schema(input_schema) -> pandas_schema.Schema:
     """ check with functions need to be called based on the schema patterm """
     input_schema_dict = input_schema[1]
@@ -67,15 +67,9 @@ def validate_dataframes(dataframes: list, schema: str) -> None:
         cleaned_dataframe = apply_validation(dataframe, output_schema)
         validate_dataframes.append(cleaned_dataframe)
     return validate_dataframes
-        
+
+
 def validate_data(publications):
     for publication in publications:
         publication['dataframes'] = validate_dataframes(publication['dataframes'], publication['schema'])
     return publications
-
-        
-
-
-
-
-
