@@ -3,8 +3,10 @@
 
 ## Contents
 - [Description](#Description)
-- [Architecture](#Architecture)
+- [Repository Structure](#Repository_Structure)
 - [Installation](#Installation)
+- [Q&A](#Q&A)
+- [Roadmap](#Roadmap)
 
 
 ## Description
@@ -78,13 +80,14 @@ GROUP by s.client_id ;
 
 ## Q&A 
 Quels sont les éléments à considérer pour faire évoluer votre code afin qu’il puisse gérer de grosses volumétries de données (fichiers de plusieurs To ou millions de fichiers par exemple) ? Pourriez-vous décrire les modifications qu’il faudrait apporter, s’il y en a, pour prendre en considération de telles volumétries ?
-Pour gérer une pipeline d'ingestion de grosses volumétries, il est préférable d'utiliser une solution Cloud afin de stocker nos données mais également de pouvoir mettre en place une pipeline avec un mécanisme de parallelisme pour augmenter la vitesse de traitement global entre l'ingestion de la data et l'output.
+Pour gérer une pipeline d'ingestion de grosses volumétries, il est préférable d'utiliser une solution Cloud afin de stocker nos données mais également de pouvoir mettre en place une pipeline avec un mécanisme de parallélisme pour augmenter la vitesse de traitement global entre l'ingestion de la data et l'output.
 
-Pour l'ingestion il est possible d'utiliser BigQuery qui est une solution GCP de Data Warehouse. BigQuery est optimal lorsque les transformations qu'on effectue sur les données sont facile à traduire en sql.
+Pour l'ingestion il est possible d'utiliser BigQuery qui est une solution GCP de Data Warehouse. BigQuery est optimal lorsque les transformations qu'on effectue sur les données sont faciles à traduire en sql.
 Pour le processing d'extraction, de transformation et de loading, si les transformations que l'on effectue sur les données sont assez complexes, je pense opté pour GCP Dataflow voir un framework de calcul distribué tel que Dataproc (avec pyspark).
 
 
-## Architecture
+
+## Repository_Structure
 ```                                         
 ├── .github/                                          # Github Actions
 ├── data/                                             # pipeline input folder
