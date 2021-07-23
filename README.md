@@ -18,7 +18,7 @@
 
 - data ingestion: data is extracted from data sources that are not optimized for analytics(.csv, .json) are converted into a Pandas Dataframe format
 
-- data validation: ensure that collected data from different sources meets data quality requirement
+- data validation: ensure that collected data from different sources meets data quality requirements
 
 - data formating: convert to the various formats and types to adhere to one consistent data structure such as date format
 
