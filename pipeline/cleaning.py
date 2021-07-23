@@ -1,14 +1,14 @@
 from datetime import datetime
 import dateutil.parser
 from settings import INPUT_DATE_FORMAT
-import pandas as pd 
+import pandas as pd
 from settings import INPUT_DATE_COLUMN_NAME
 
-def rename_column(dataframe: pd.DataFrame, input_name:str, output_name:str)-> pd.DataFrame:
+
+def rename_column(dataframe: pd.DataFrame, input_name: str, output_name: str) -> pd.DataFrame:
     if input_name in dataframe:
         dataframe.rename(columns={input_name: output_name}, inplace=True)
     return dataframe
-
 
 
 def format_date(dataframe: pd.DataFrame) -> pd.DataFrame:
@@ -18,7 +18,7 @@ def format_date(dataframe: pd.DataFrame) -> pd.DataFrame:
             dataframe[INPUT_DATE_COLUMN_NAME][0] = dateutil.parser.parse(row).strftime(INPUT_DATE_FORMAT)
         return dataframe
 
-    
+
 def clean_dataframes(dataframes: list) -> list:
     """ format a list of dataframes for data consistency """
     for dataframe in dataframes:

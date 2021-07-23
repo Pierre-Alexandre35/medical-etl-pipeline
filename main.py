@@ -5,9 +5,9 @@ from pipeline.cleaning import clean_data
 from pipeline.save import save_data
 from pipeline.process import process_data
 from sql.queries import execute_query
-from settings import (PIPELINE_STORAGE_FOLDER, 
-                      QUERY_ONE, QUERY_TWO, 
-                      PIPELINE_RESULT_FOLDER_NAME, 
+from settings import (PIPELINE_STORAGE_FOLDER,
+                      QUERY_ONE, QUERY_TWO,
+                      PIPELINE_RESULT_FOLDER_NAME,
                       GRAPH_FILE_NAME,
                       PIPELINE_PUBLICATIONS_FOLDER,
                       PIPELINE_INPUT_DATA_FOLDER,
