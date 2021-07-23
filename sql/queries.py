@@ -1,9 +1,9 @@
 from google.cloud import bigquery
 from utils.file import save_to_file, remove_file_extension
 import json
+from settings import BQ_PROJECT_ID
 
-
-client = bigquery.Client()
+client = bigquery.Client(BQ_PROJECT_ID)
 
 
 def execute_query(query_name: str) -> None:
@@ -13,6 +13,7 @@ def execute_query(query_name: str) -> None:
             query_reader = text_file.read()
         query_job = client.query(query_reader)
         records = [dict(row) for row in query_job]
+        print(records)
         json_obj = json.dumps(str(records))
         result_file_path = "results/sql/" + remove_file_extension(query_name) + ".json"
         save_to_file(json_obj, result_file_path)

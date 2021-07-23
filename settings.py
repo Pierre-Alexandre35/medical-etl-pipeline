@@ -1,6 +1,8 @@
 
 ## General
 
+## BigQuery 
+BQ_PROJECT_ID = "sbx-da"
 
 
 
@@ -18,6 +20,8 @@ PIPELINE_INPUT_DATA_FOLDER = "data/"
 PIPELINE_PUBLICATIONS_FOLDER = "publications/"
 PIPELINE_DRUGS_FOLDER = "drugs/"
 PIPELINE_DATA_SCHEMA_FILENAME = "schema.yaml"
+PIPELINE_PUBLICATIONS_COLUMNS = ["id", "title", "date", "journal"]
+PIPELINE_DRUGS_COLUMNS = ["atccode", "drug"]
 
 ## to clean
 DRUGS_FILENAME = "drugs.json"

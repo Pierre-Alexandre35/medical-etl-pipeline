@@ -1,15 +1,6 @@
 import json
 import os
 
-from settings import (
-    RESULTS_FOLDER,
-    DRUGS_FILENAME,
-    CLINICAL_TRIALS_FILENAME,
-    PUBMED_FILENAME,
-    GRAPH_NAME
-)
-
-
 def generate_mention_drug_item(type, drug_id, drug_name, title, journal, date):
     return {
         'type': type,
