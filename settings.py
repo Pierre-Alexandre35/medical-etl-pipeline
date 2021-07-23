@@ -5,7 +5,6 @@
 BQ_PROJECT_ID = "sbx-da"
 
 
-
 ## Queries
 QUERY_ONE = "total_sales"
 QUERY_TWO = "sales_by_category"
