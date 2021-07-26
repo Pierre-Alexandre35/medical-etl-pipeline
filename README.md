@@ -53,26 +53,32 @@ GROUP by s.client_id ;
 <br>
 
 ```## clone the Github repository```
+
 ```git clone https://github.com/Pierre-Alexandre35/servier-test```
 <br>
 
 ```## create your own virtual environment```
+
 ```virtualenv dev```
 <br>
 
 ```## activate your virtual environment```
+
 ```source dev/bin/activate```
 <br>
 
 ```## install required Python packages```
+
 ```pip3 install -r requirements.txt```
 <br>
 
 ```## run the ETL pipeline```
+
 ```python main.py --pipeline```
 <br>
 
 ```## run the SQL queries```
+
 ```python main.py --query=<QUERY_NAME> ```
 ```## where QUERY_NAME is total_sales or sales_by_category ```
 

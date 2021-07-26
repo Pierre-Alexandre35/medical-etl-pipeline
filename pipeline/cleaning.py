@@ -1,7 +1,7 @@
 import dateutil.parser
-from settings import INPUT_DATE_FORMAT
 import pandas as pd
-from settings import INPUT_DATE_COLUMN_NAME
+from settings import INPUT_DATE_COLUMN_NAME, INPUT_DATE_FORMAT
+
 
 
 def rename_column(dataframe: pd.DataFrame, input_name: str, output_name: str) -> pd.DataFrame:

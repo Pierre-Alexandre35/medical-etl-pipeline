@@ -1,9 +1,9 @@
+import bios
 import pandas as pd
 from pandas.core.arrays import boolean
 import pandas_schema
 from pandas_schema import Column
 from pandas_schema.validation import CustomElementValidation
-import bios
 from utils.validators import check_null, check_string, check_decimal
 
 
@@ -21,7 +21,7 @@ def apply_validation(dataframe, schema) -> pd.DataFrame:
     return data_clean
 
 
-def generate_column(name: str, type: str, is_required: boolean, regex=None) -> Column:
+def generate_column(name: str, type: str, is_required: boolean, regex=None) -> pandas_schema.Column:
     """ generate a list of Columns based on the schema provided by the user """
     if type != 'string' and type != 'float' and type != 'int':
         raise TypeError("{{type}} is not supported yet")

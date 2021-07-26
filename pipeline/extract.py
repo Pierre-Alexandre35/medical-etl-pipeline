@@ -1,9 +1,10 @@
-import pandas as pd
-import pathlib
 import os
 import json
-from pandas.core.frame import DataFrame
 import yaml
+import pathlib
+import pandas as pd
+from pandas.core.frame import DataFrame
+
 
 
 def read_json_file(filename: str) -> DataFrame:
