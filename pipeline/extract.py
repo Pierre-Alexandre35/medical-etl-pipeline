@@ -1,11 +1,9 @@
 import pandas as pd
-from pandas import json_normalize
 import pathlib
 import os
 import json
 from pandas.core.frame import DataFrame
 import yaml
-from utils.file import remove_file_extension
 
 
 def read_json_file(filename: str) -> DataFrame:
