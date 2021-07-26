@@ -1,8 +1,11 @@
+import os
 
-## General
 
-## BigQuery 
-BQ_PROJECT_ID = "sbx-da"
+## Google Cloud Platform
+if "GCP_PROJECT_ID" in os.environ:
+    GCP_PROJECT_ID = os.environ['GCP_PROJECT_ID']
+else:
+    GCP_PROJECT_ID = "sbx-da"
 
 
 ## Queries
