@@ -1,4 +1,4 @@
-# Drug ETL pipeline 🏥
+# Servier Test - ETL Pipeline and SQL Queries 🏥
 
 
 ## Contents
