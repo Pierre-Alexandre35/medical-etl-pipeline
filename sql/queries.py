@@ -1,9 +1,9 @@
 from google.cloud import bigquery
 from utils.file import save_to_file, remove_file_extension
 import json
-from settings import BQ_PROJECT_ID
+from settings import GCP_PROJECT_ID
 
-client = bigquery.Client(BQ_PROJECT_ID)
+client = bigquery.Client(GCP_PROJECT_ID)
 
 
 def execute_query(query_name: str) -> None:
