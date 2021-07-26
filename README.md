@@ -72,6 +72,11 @@ GROUP by s.client_id ;
 ```pip3 install -r requirements.txt```
 <br>
 
+**set your environement variables**
+
+```export GCP_PROJECT_ID=<YOUR_GCP_PROJECT_ID>``
+<br>
+
 **run the ETL pipeline**
 
 ```python main.py --pipeline```
