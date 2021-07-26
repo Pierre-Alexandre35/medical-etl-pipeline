@@ -1,6 +1,7 @@
 import json
 import os
 
+
 def generate_mention_drug_item(type, drug_id, drug_name, title, journal, date):
     return {
         'type': type,
