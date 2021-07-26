@@ -1,4 +1,3 @@
-from datetime import datetime
 import dateutil.parser
 from settings import INPUT_DATE_FORMAT
 import pandas as pd
