@@ -90,6 +90,7 @@ GROUP by s.client_id ;
 
 ## Roadmap
 - Add unit tests (priority) 
+- Parallel rather than consecutive data processing with Pandas (priority) 
 
 ## Repository_Structure
 ```                                         
