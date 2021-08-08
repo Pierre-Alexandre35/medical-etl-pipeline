@@ -6,7 +6,6 @@ import pandas as pd
 from pandas.core.frame import DataFrame
 
 
-
 def read_json_file(filename: str) -> DataFrame:
     """ convert a JSON file to YAML before to convert it into a pandas.Dataframe """
     yaml_data = yaml.safe_load(open(filename))
