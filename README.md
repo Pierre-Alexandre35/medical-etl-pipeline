@@ -89,14 +89,7 @@ GROUP by s.client_id ;
 
 
 ## Roadmap
-- Fix file saving path (priority)
-- Add the crinimal_trials in the data processing process (priority)
 - Add unit tests (priority) 
-- Fix CLI to launch the pipeline (priority)
-- Removed hard-coded variables and moved them to the settings.py (priority)
-- Linter modifications following pip8 convention
-- Create a Dockerfile
-
 
 ## Repository_Structure
 ```                                         
